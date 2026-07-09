@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ben 10 Birthday Hub</title>
+    <title>Michael's Game Room - Ben 10 Hub</title>
     <style>
         :root {
             --omnitrix-glow: #00ff00;
@@ -27,6 +27,7 @@
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background-color 0.5s ease;
         }
 
         /* Header Navigation */
@@ -37,6 +38,7 @@
             border-bottom: 3px solid var(--omnitrix-glow);
             box-shadow: 0 4px 15px rgba(0, 255, 0, 0.2);
             z-index: 10;
+            transition: border-color 0.5s ease, box-shadow 0.5s ease;
         }
 
         header h1 {
@@ -45,10 +47,12 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 10px var(--omnitrix-glow);
+            transition: text-shadow 0.5s ease;
         }
 
         header span {
             color: var(--omnitrix-glow);
+            transition: color 0.5s ease;
         }
 
         /* Main Workspace Layout */
@@ -65,7 +69,16 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            background: radial-gradient(circle, #1a231a 0%, #0d0d0d 100%);
+            
+            /* Background image settings. Modify the filename inside url() when ready! */
+            background-image: url('alien-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: overlay;
+            background-color: rgba(15, 20, 15, 0.85); 
+            
+            transition: background-color 0.5s ease;
         }
 
         .terminal-header {
@@ -77,6 +90,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: border-color 0.5s ease;
         }
 
         .status-dot {
@@ -86,11 +100,12 @@
             border-radius: 50%;
             box-shadow: 0 0 8px var(--omnitrix-glow);
             animation: pulse 2s infinite;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease;
         }
 
         .game-frame-container {
             flex: 1;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.75);
             border: 1px solid var(--omnitrix-dark-glow);
             border-top: none;
             border-radius: 0 0 8px 8px;
@@ -99,9 +114,9 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            transition: border-color 0.5s ease;
         }
 
-        /* Iframe placeholder for your actual game */
         .game-frame-container iframe {
             width: 100%;
             height: 100%;
@@ -114,6 +129,7 @@
             padding: 20px;
         }
 
+        /* Adaptive Omnitrix Style Buttons */
         .omnitrix-btn {
             background-color: #000;
             color: var(--omnitrix-glow);
@@ -125,7 +141,7 @@
             cursor: pointer;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 255, 0, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.5s ease; /* Makes background, color, and glowing lines fade smoothly */
             margin-top: 15px;
         }
 
@@ -135,7 +151,7 @@
             box-shadow: 0 0 20px var(--omnitrix-glow);
         }
 
-        /* Sidebar for Video Call */
+        /* Sidebar for Video Call & Audio Controller */
         .comms-sidebar {
             flex: 1;
             min-width: 300px;
@@ -145,6 +161,7 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
+            transition: border-color 0.5s ease;
         }
 
         .sidebar-title {
@@ -154,10 +171,10 @@
             color: var(--omnitrix-glow);
             border-bottom: 1px solid var(--omnitrix-dark-glow);
             padding-bottom: 5px;
+            transition: color 0.5s ease, border-color 0.5s ease;
         }
 
         .video-container {
-            flex: 1;
             background-color: #000;
             border-radius: 6px;
             border: 1px dashed var(--omnitrix-glow);
@@ -167,14 +184,32 @@
             align-items: center;
             color: #666;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
+            transition: border-color 0.5s ease;
+        }
+
+        .music-panel {
+            margin-top: 20px; 
+            background: #000; 
+            padding: 15px; 
+            border-radius: 6px; 
+            border: 1px solid var(--omnitrix-dark-glow);
+            transition: border-color 0.5s ease;
+        }
+
+        .music-panel-title {
+            color: var(--omnitrix-glow); 
+            margin-bottom: 10px; 
+            font-size: 0.9rem; 
+            text-transform: uppercase;
+            transition: color 0.5s ease;
         }
 
         /* Animations */
         @keyframes pulse {
-            0% { opacity: 0.4; box-shadow: 0 0 4px var(--omnitrix-glow); }
-            50% { opacity: 1; box-shadow: 0 0 12px var(--omnitrix-glow); }
-            100% { opacity: 0.4; box-shadow: 0 0 4px var(--omnitrix-glow); }
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
         }
 
         /* Responsive Breakpoint for Mobile/Small Screens */
@@ -182,12 +217,12 @@
             .dashboard-container {
                 flex-direction: column;
                 height: auto;
-                overflow: y-scroll;
+                overflow-y: scroll;
             }
             .comms-sidebar {
                 max-width: 100%;
                 min-width: 100%;
-                height: 300px;
+                height: auto;
                 border-left: none;
                 border-top: 2px solid var(--omnitrix-dark-glow);
             }
@@ -200,20 +235,20 @@
 <body>
 
     <header>
-        <h1>Plumber Command: <span>Ben's 2026 Birthday Hub</span></h1>
+        <h1>Plumber Command: <span id="headerAccent">Birthday Hub</span></h1>
     </header>
 
     <div class="dashboard-container">
         
-        <main class="game-terminal">
+        <main class="game-terminal" id="terminalScreen">
             <div class="terminal-header">
-                <h3>Omnitrix Game Console</h3>
+                <h3 id="panelTitle">Omnitrix Game Console</h3>
                 <div class="status-dot" id="statusDot"></div>
             </div>
             <div class="game-frame-container" id="gameWindow">
                 <div class="game-placeholder" id="placeholderText">
-                    <p>System Online. Awaiting Alien Activation Sequence.</p>
-                    <button class="omnitrix-btn" onclick="initializeGame()">Activate Trivia Game</button>
+                    <p style="margin-bottom: 10px;">System Online. Awaiting Alien Activation Sequence.</p>
+                    <button class="omnitrix-btn" id="activateBtn" onclick="initializeGame()">Activate Trivia Game</button>
                 </div>
             </div>
         </main>
@@ -221,36 +256,137 @@
         <aside class="comms-sidebar">
             <h3 class="sidebar-title">Comms Channel</h3>
             <div class="video-container" id="videoContainer">
-                <p>⚡ Video Link Standby ⚡</p>
-                <small style="margin-top: 10px; color: #888;">
-                    Replace this area with a Discord Widget or an iframe from Jitsi Meet / Zoom.
-                </small>
+                <p style="color: var(--omnitrix-glow); font-weight: bold; margin-bottom: 5px; transition: color 0.5s ease;">⚡ Video Link Standby ⚡</p>
+                <small style="color: #666;">Ready for your party connection frame.</small>
+            </div>
+
+            <div class="music-panel">
+                <h4 class="music-panel-title">Omnitrix Audio System</h4>
+                <div id="trackName" style="font-size: 0.8rem; margin-bottom: 12px; color: #aaa; font-weight: bold;">
+                    Mode: System Standby
+                </div>
+                
+                <audio id="jukebox" preload="auto"></audio>
+
+                <div style="display: flex; gap: 10px;">
+                    <button class="omnitrix-btn" id="playBtn" style="padding: 6px 12px; font-size: 0.8rem; margin-top: 0; flex: 1;" onclick="playPlaylist()">Play Music</button>
+                    <button class="omnitrix-btn" id="cycleBtn" style="padding: 6px 12px; font-size: 0.8rem; margin-top: 0; flex: 1;" onclick="nextTrack()">Cycle Alien</button>
+                </div>
             </div>
         </aside>
 
     </div>
 
     <script>
-        // Update this URL to point to your hosted trivia or card game
+        // Pre-linked to your live GitHub Pages trivia game
         const YOUR_GAME_URL = "https://amatimi.github.io/ben10-trivia/"; 
 
-        function initializeGame() {
-            const container = document.getElementById('gameWindow');
+        // Multi-Alien Theme & Playlist Data Structure
+        // 🛠️ REMINDER: Change track1.mp3, track2.mp3, etc. below to match your uploaded audio files!
+        const playlist = [
+            { 
+                title: "Upgrade (Galvanic Mechamorph Mode)", 
+                file: "track1.mp3", 
+                color: "#00ff00",       // Classic Glow Green
+                darkColor: "#005500",
+                paneBg: "rgba(15, 25, 15, 0.85)"
+            },
+            { 
+                title: "Heatblast (Pyrokinesis Core Mode)", 
+                file: "track2.mp3", 
+                color: "#ff4500",       // Bright Pyro Orange-Red
+                darkColor: "#8b0000",
+                paneBg: "rgba(35, 15, 10, 0.85)"
+            },
+            { 
+                title: "XLR8 (Kineceleran Velocity Mode)", 
+                file: "track3.mp3", 
+                color: "#00ffff",       // Speed Cyan
+                darkColor: "#007777",
+                paneBg: "rgba(10, 25, 30, 0.85)"
+            },
+            { 
+                title: "Four Arms (Tetramand Combat Mode)", 
+                file: "track4.mp3", 
+                color: "#ff1111",       // Warrior Red
+                darkColor: "#550000",
+                paneBg: "rgba(30, 10, 10, 0.85)"
+            }
+        ];
+
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+
+        const jukebox = document.getElementById('jukebox');
+        const trackLabel = document.getElementById('trackName');
+        const terminalScreen = document.getElementById('terminalScreen');
+
+        // Load specific tracks and change CSS variables + button layout colors
+        function loadTrack(index) {
+            if (playlist.length === 0) return;
             
-            // Seamlessly inject the game via an iframe
+            const alienMode = playlist[index];
+            jukebox.src = alienMode.file;
+            trackLabel.innerText = `Mode: ${alienMode.title}`;
+            
+            // 1. Update global UI color variables
+            document.documentElement.style.setProperty('--omnitrix-glow', alienMode.color);
+            document.documentElement.style.setProperty('--omnitrix-dark-glow', alienMode.darkColor);
+            
+            // 2. Adjust central background glass color tint
+            terminalScreen.style.backgroundColor = alienMode.paneBg;
+
+            // 3. Keep the blinking indicator light dynamically styled
+            const dot = document.getElementById('statusDot');
+            if (dot) {
+                dot.style.backgroundColor = alienMode.color;
+                dot.style.boxShadow = `0 0 12px ${alienMode.color}`;
+            }
+        }
+
+        function playPlaylist() {
+            if (!jukebox.src) {
+                loadTrack(currentTrackIndex);
+            }
+            
+            jukebox.play().then(() => {
+                isPlaying = true;
+            }).catch(err => {
+                console.log("Audio waiting for user gesture initialization.", err);
+                trackLabel.innerText = "Click 'Play Music' to clear block";
+            });
+        }
+
+        function nextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            loadTrack(currentTrackIndex);
+            if (isPlaying) {
+                jukebox.play().catch(e => console.log("Audio block exception handled"));
+            }
+        }
+
+        jukebox.addEventListener('ended', () => {
+            nextTrack();
+        });
+
+        // Launch the iframe game space
+        function initializeGame() {
+            playPlaylist();
+
+            const container = document.getElementById('gameWindow');
             container.innerHTML = `
                 <iframe 
                     src="${YOUR_GAME_URL}" 
-                    title="Ben 10 Custom Game"
+                    title="Ben 10 Custom Game System"
                     allow="fullscreen">
                 </iframe>
             `;
-            
-            // Visually change the dashboard status when active
-            const dot = document.getElementById('statusDot');
-            dot.style.backgroundColor = '#00ffff';
-            dot.style.boxShadow = '0 0 12px #00ffff';
         }
+
+        // Initialize template layout parameters
+        window.addEventListener('DOMContentLoaded', () => {
+            loadTrack(currentTrackIndex);
+        });
     </script>
 </body>
 </html>
